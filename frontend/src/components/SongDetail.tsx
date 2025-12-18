@@ -39,9 +39,10 @@ export default function SongDetail({ song }: { song: Song }) {
     };
 
     // Cover URL: /api/cover/[id]?title=...&artist=...
-    const coverUrl = `http://localhost:8000/api/cover/${song.coverParams}?title=${encodeURIComponent(song.title)}&artist=${encodeURIComponent(song.artist)}`;
+    const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000';
+    const coverUrl = `${apiUrl}/api/cover/${song.coverParams}?title=${encodeURIComponent(song.title)}&artist=${encodeURIComponent(song.artist)}`;
     // Audio URL: /api/music/preview/[id]?genre=...
-    const audioUrl = `http://localhost:8000/api/music/preview/${song.id}?genre=${encodeURIComponent(song.genre)}`;
+    const audioUrl = `${apiUrl}/api/music/preview/${song.id}?genre=${encodeURIComponent(song.genre)}`;
 
     return (
         <div className="flex flex-col md:flex-row gap-8 bg-blue-50/0 rounded-xl">
@@ -133,3 +134,4 @@ export default function SongDetail({ song }: { song: Song }) {
         </div>
     );
 }
+
