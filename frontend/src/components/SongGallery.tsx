@@ -28,6 +28,7 @@ export default function SongGallery({ songs, loadMore, loading }: SongGalleryPro
     // For simplicity given requirements "expandable", I'll make the card expand in place or show a modal.
     // A modal is best for Gallery.
 
+    const [selectedSong, setSelectedSong] = React.useState<Song | null>(null);
     const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000';
 
     return (
@@ -87,4 +88,5 @@ export default function SongGallery({ songs, loadMore, loading }: SongGalleryPro
         </>
     );
 }
+
 
