@@ -52,7 +52,8 @@ export function useSongs(options: Omit<GeneratorOptions, 'page'>): UseSongsRetur
                 viewMode: options.viewMode
             });
 
-            const res = await fetch(`http://localhost:8000/api/songs?${params}`);
+            const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000';
+            const res = await fetch(`${apiUrl}/api/songs?${params}`);
             if (!res.ok) throw new Error("Failed to fetch");
             const data = await res.json();
 
@@ -100,3 +101,4 @@ export function useSongs(options: Omit<GeneratorOptions, 'page'>): UseSongsRetur
 
     return { songs, loading, error, hasMore, loadMore, setPage, page };
 }
+
