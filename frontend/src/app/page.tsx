@@ -12,7 +12,7 @@ export default function MusicApp() {
   const [likesAvg, setLikesAvg] = useState(5);
   const [viewMode, setViewMode] = useState<'table' | 'gallery'>('table');
 
-  const { songs, loading, loadMore, setPage, page, hasMore } = useSongs({
+  const { songs, loading, error, loadMore, setPage, page, hasMore } = useSongs({
     seed,
     region,
     likesAvg,
@@ -118,7 +118,15 @@ export default function MusicApp() {
 
       {/* Content */}
       <main className="max-w-7xl mx-auto px-6 pb-20">
-        {viewMode === 'table' ? (
+          {/* ADD THIS BLOCK */}
+          {error && (
+              <div className="bg-red-50 border border-red-200 text-red-600 px-4 py-3 rounded-lg mb-6">
+                  <strong>Error:</strong> {error}
+                  <br/>
+                  <span className="text-sm text-red-500">Check your API URL and backend permissions.</span>
+              </div>
+          )}
+          {viewMode === 'table' ? (
           <SongTable songs={songs} page={page} setPage={setPage} loading={loading} />
         ) : (
           <SongGallery songs={songs} loadMore={loadMore} loading={loading} />
